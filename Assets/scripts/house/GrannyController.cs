@@ -25,6 +25,7 @@ public class GrannyController : MonoBehaviour {
 		if(other.name=="glasses"){
 			audio.Play ();
 			Destroy(other.gameObject);
+			GrannyState.hasGlasses = true;
 		}
 	}
 	
