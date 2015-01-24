@@ -296,7 +296,6 @@ GameObject:
   - 114: {fileID: 1265398988}
   - 61: {fileID: 1265398991}
   - 50: {fileID: 1265398992}
-  - 114: {fileID: 1265398993}
   m_Layer: 0
   m_Name: grannycar
   m_TagString: Untagged
@@ -408,24 +407,6 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
---- !u!114 &1265398993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1265398985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3b65b5b2653bad47a531d7169e984cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask: {}
-  skinWidth: .610000014
-  minimumExtent: 0
-  partialExtent: 0
-  sqrMinimumExtent: 0
-  previousPosition: {x: 0, y: 0}
-  myRigidbody: {fileID: 0}
 --- !u!1 &1577564661
 GameObject:
   m_ObjectHideFlags: 0
