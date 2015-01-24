@@ -34,11 +34,72 @@ public class GrannyState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		initGranny();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+	void grannyOneHealthInterval(){
+
+		currentHunger++;
+
+		//hydration/bladder stuff
+		if(currentHydration>50){
+			currentBladder++;
+		}
+
+		currentHydration--;
+
+		grannyCheckDeath();
+
+	}
+
+	void grannyCheckDeath(){
+		if(currentHunger>=100){
+			grannyDeath();
+			return;
+		}
+		if(currentBladder>=100){
+			grannyDeath();
+			return;
+		}
+		if(currentBloodPressure>=100){
+			grannyDeath();
+			return;
+		}
+		if(currentHydration<=0){
+			grannyDeath();
+			return;
+		}
+
+	}
+
+	void grannyDeath(){
+		//game over
+	}
+
+	void eatBread(){
+		if(breadCt>0){
+			currentHunger-=20;
+			breadCt--;
+		}
+	}
+
+	void eatCandy(){
+		if(candyCt>0){
+			currentHunger-=5;
+			candyCt--;
+		}
+	}
+
+	void drink(){
+		if(drinkCt>0){
+			currentHydration+=40;
+			drinkCt--;
+		}
+	}
+
 }

@@ -41,3 +41,11 @@ TagManager:
     userID: 0
     uniqueID: 0
     locked: 0
+  - name: road
+    userID: 1
+    uniqueID: 2183867185
+    locked: 0
+  - name: car
+    userID: 2
+    uniqueID: 2869203717
+    locked: 0
