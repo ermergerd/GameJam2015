@@ -1,21 +1,29 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GrannyState : MonoBehaviour {
 
-	int moneyCt;
-	int breadCt;
-	int candyCt;
-	int drinkCt;
-	bool hasGlasses;
-	bool hasDentures;
-	bool hasCane;
+	public Slider hungerSlider;
+	public Slider bloodSlider;
+	public Slider bladderSlider;
+	public Slider hydrationSlider;
+
+	const float healthInterval = 10;
+
+	public static int moneyCt;
+	public static int breadCt;
+	public static int candyCt;
+	public static int drinkCt;
+	public static bool hasGlasses;
+	public static bool hasDentures;
+	public static bool hasCane;
 	//TODO meds
 
-	int currentHunger; //die if 0, goes up over time
-	int currentBloodPressure; //die if 100, goes up on harm events
-	int currentBladder; //die if 100, goes up over time if hydrated
-	int currentHydration; //die if 0, goes down over time
+	public static int currentHunger; //die if 0, goes up over time
+	public static int currentBloodPressure; //die if 100, goes up on harm events
+	public static int currentBladder; //die if 100, goes up over time if hydrated
+	public static int currentHydration; //die if 0, goes down over time
 
 	void initGranny(){
 		moneyCt = 10;
@@ -35,14 +43,18 @@ public class GrannyState : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		initGranny();
+		InvokeRepeating("grannyOneHealthInterval", healthInterval, healthInterval);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		hungerSlider.value = currentHunger;
+		bloodSlider.value = currentBloodPressure;
+		hydrationSlider.value = currentHydration;
+		bladderSlider.value = currentBladder;
 	}
 
-	void grannyOneHealthInterval(){
+	private void grannyOneHealthInterval(){
 
 		currentHunger++;
 
@@ -57,7 +69,7 @@ public class GrannyState : MonoBehaviour {
 
 	}
 
-	void grannyCheckDeath(){
+	private void grannyCheckDeath(){
 		if(currentHunger>=100){
 			grannyDeath();
 			return;
@@ -77,25 +89,26 @@ public class GrannyState : MonoBehaviour {
 
 	}
 
-	void grannyDeath(){
+	private void grannyDeath(){
 		//game over
+		Application.Quit();
 	}
 
-	void eatBread(){
+	public static void eatBread(){
 		if(breadCt>0){
 			currentHunger-=20;
 			breadCt--;
 		}
 	}
 
-	void eatCandy(){
+	public static void eatCandy(){
 		if(candyCt>0){
 			currentHunger-=5;
 			candyCt--;
 		}
 	}
 
-	void drink(){
+	public static void drink(){
 		if(drinkCt>0){
 			currentHydration+=40;
 			drinkCt--;

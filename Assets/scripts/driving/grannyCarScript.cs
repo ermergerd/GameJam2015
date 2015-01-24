@@ -58,5 +58,6 @@ public class grannyCarScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision) {
 		speed = 0;
+		GrannyState.currentBloodPressure+=20;
 	}
 }
