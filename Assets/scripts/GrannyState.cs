@@ -9,7 +9,7 @@ public class GrannyState : MonoBehaviour {
 	public Slider bladderSlider;
 	public Slider hydrationSlider;
 
-	const float healthInterval = 10;
+	const float healthInterval = 5;
 
 	public static int moneyCt;
 	public static int breadCt;
@@ -52,10 +52,11 @@ public class GrannyState : MonoBehaviour {
 		bloodSlider.value = currentBloodPressure;
 		hydrationSlider.value = currentHydration;
 		bladderSlider.value = currentBladder;
+
 	}
 
 	private void grannyOneHealthInterval(){
-
+		Debug.Log("grannyOneHealthInterval");
 		currentHunger++;
 
 		//hydration/bladder stuff

@@ -58,6 +58,11 @@ public class grannyCarScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision) {
 		speed = 0;
-		GrannyState.currentBloodPressure+=20;
+		if(collision.gameObject.name=="finishline"){
+			//go to bingo!
+			Application.LoadLevel("bingo_scene");
+		}else{
+			GrannyState.currentBloodPressure+=20;
+		}
 	}
 }
