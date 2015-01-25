@@ -5,14 +5,17 @@ public class SpawnRoads : MonoBehaviour {
 
 	public GameObject road;
 
-	const int roadSegCt = 100;
+	const int roadSegCt = 1000;
 
 	// Use this for initialization
 	void Start () {
 		Vector3 pos = transform.position;
 		GameObject temp = null;
+		bool neg = Random.value>.5;
 		for(int i=0; i<roadSegCt; i++){
-			bool neg = Random.value>.5;
+			if(i%5==0){
+				neg = Random.value>.5;
+			}
 			float offset = Random.value *3;
 			if(neg){
 				offset*=-1;
