@@ -153,7 +153,22 @@ public class game : MonoBehaviour {
 		calledNumbers.Add(currentNumber);
 		bucket.RemoveAt (index);
 
-		// TODO: Announce the number
+		// Announce the number
+		string clip;
+		if (currentNumber <= 15) {
+			clip = "B" + currentNumber.ToString();
+		} else if (currentNumber <= 30) {
+			clip = "I" + currentNumber.ToString();
+		} else if (currentNumber <= 45) {
+			clip = "N" + currentNumber.ToString();
+		} else if (currentNumber <= 60) {
+			clip = "G" + currentNumber.ToString();
+		} else {
+			clip = "O" + currentNumber.ToString();
+		}
+		AudioClip number = Resources.Load (clip) as AudioClip;
+		audio.clip = number;
+		audio.Play ();
 
 		// Show a circle around the number on the board
 		GameObject circle = Resources.Load ("circle") as GameObject;
@@ -186,6 +201,11 @@ public class game : MonoBehaviour {
 						if (CheckForWinner(ref opponentBoardsStates[i], j, k)) {
 							// TODO: Handle other winner
 							Debug.Log ("Game over: someone else won!");
+
+							AudioClip other_winner = Resources.Load ("bingo_other_winner") as AudioClip;
+							audio.clip = other_winner;
+							audio.Play ();
+
 							gameOver = true;
 						}
 					}
@@ -239,6 +259,10 @@ public class game : MonoBehaviour {
 					if (CheckForWinner(ref boardsStates[boardNum], j, k)) {
 						// TODO: Handle granny winner (add money)
 						GrannyState.instance.moneyCt += 50;
+
+						AudioClip other_winner = Resources.Load ("grannygotbingo") as AudioClip;
+						audio.clip = other_winner;
+						audio.Play ();
 
 						Debug.Log("Game over: Granny won!!");
 						gameOver = true;
