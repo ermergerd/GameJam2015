@@ -19,12 +19,25 @@ public class GrannyController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log ("Granny OnTriggerEnter Called");
+		Debug.Log ("Granny OnTriggerEnter2D Called");
 
+		if (other.name == "glasses"){
 
-		if(other.name=="glasses"){
 			audio.Play ();
 			Destroy(other.gameObject);
+			GrannyState.hasGlasses = true;
+
+		} else if (other.name == "kitchen door boundary") {
+
+			if (Application.loadedLevelName == "kitchen") {
+
+				Application.LoadLevel("wakeup_scene");
+
+			} else {
+
+				Application.LoadLevel("kitchen");
+
+			}
 		}
 	}
 	
