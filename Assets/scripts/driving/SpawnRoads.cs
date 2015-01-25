@@ -5,7 +5,7 @@ public class SpawnRoads : MonoBehaviour {
 
 	public GameObject road;
 
-	const int roadSegCt = 1000;
+	const int roadSegCt = 500;
 
 	// Use this for initialization
 	void Start () {

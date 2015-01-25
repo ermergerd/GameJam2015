@@ -71,6 +71,11 @@ public class GrannyState : MonoBehaviour {
 	[System.NonSerialized]
 	public int currentHydration; //die if 0, goes down over time
 
+	private bool beatHouse = false;
+	private bool beatDriving = false;
+	private bool beatBingo = false;
+	private bool beatStore = false;
+
 	void initGranny(){
 		moneyCt = 10;
 		breadCt = 0;
@@ -82,7 +87,7 @@ public class GrannyState : MonoBehaviour {
 
 		currentHunger = 10;
 		currentBloodPressure = 20;
-		currentBladder = 90;
+		currentBladder = 70;
 		currentHydration = 60;
 	}
 
@@ -166,4 +171,33 @@ public class GrannyState : MonoBehaviour {
 		}
 	}
 
+	public void loadNextLevel(){
+		if(!beatHouse){
+			beatHouse = true;
+			Application.LoadLevel("driving");
+		}else if(!beatDriving){
+			beatDriving = true;
+			Application.LoadLevel("bingo_scene");
+		}else if(!beatBingo){
+			beatBingo = true;
+			Application.LoadLevel("shop");
+		}else{ //if(!beatStore){
+
+			beatStore = true;
+			//random level!
+			float numLevels = 4;
+			float l = Random.value*4;
+
+			if(l<1)
+				Application.LoadLevel("wakeup_scene");
+			else if(l<2)
+				Application.LoadLevel("driving");
+			else if(l<3)
+				Application.LoadLevel("bingo_scene");
+			else if(l<4)
+				Application.LoadLevel("shop");
+
+
+		}
+	}
 }

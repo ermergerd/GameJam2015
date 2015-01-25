@@ -73,7 +73,8 @@ public class ToasterController : MonoBehaviour {
 			
 			if (++numberOfBreadHits >= breadHitsToTransition) {
 
-				Application.LoadLevel("driving");
+				//Application.LoadLevel("driving");
+				GrannyState.instance.loadNextLevel();
 
 			}
 		}

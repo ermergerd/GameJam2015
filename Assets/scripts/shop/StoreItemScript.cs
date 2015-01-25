@@ -57,6 +57,7 @@ public class StoreItemScript : MonoBehaviour {
 		}
 		//show price
 		buttonText.text = "$"+price;
+		buttonText.renderer.sortingOrder = 2;
 	}
 	
 	// Update is called once per frame

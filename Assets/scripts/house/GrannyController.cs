@@ -102,6 +102,8 @@ public class GrannyController : MonoBehaviour {
 				Application.LoadLevel("kitchen");
 
 			}
+			//GrannyState.instance.loadNextLevel();
+
 		} else if (other.name == "bathroom door boundary") {
 
 			if (GrannyState.instance.hasGlasses) {
