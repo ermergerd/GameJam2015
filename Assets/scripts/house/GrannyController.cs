@@ -5,9 +5,21 @@ public class GrannyController : MonoBehaviour {
 
 	public float speed = 1.5f;
 	private Vector3 target;
-	
+	private const string myGlasses = "glasses";
+	private const int ohThereItIsAudio = 0;
+	private const int whereAreMyGlassesAudio = 1;
+	private AudioSource[] aSources;
+
 	void Start () {
 		target = transform.position;
+		aSources = GetComponents<AudioSource>();
+
+		if (Application.loadedLevelName == "wakeup_scene" && 
+		    GrannyState.hasGlasses==false) {
+
+			aSources[whereAreMyGlassesAudio].Play();
+
+		}
 	}
 	
 	void Update () {
@@ -21,9 +33,9 @@ public class GrannyController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		Debug.Log ("Granny OnTriggerEnter2D Called");
 
-		if (other.name == "glasses"){
+		if (other.name == myGlasses) {
 
-			audio.Play ();
+			aSources[ohThereItIsAudio].Play();
 			Destroy(other.gameObject);
 			GrannyState.hasGlasses = true;
 
@@ -40,6 +52,10 @@ public class GrannyController : MonoBehaviour {
 
 			}
 		}
+	}
+
+	void OnCollisionEnter2D(Collision2D other) {
+		//target = transform.position;
 	}
 	
 }
