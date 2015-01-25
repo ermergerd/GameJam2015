@@ -342,7 +342,7 @@ public class game : MonoBehaviour {
 
 	void PlaceToken(int board, int i, int j) {
 		// Show a circle around the number on the board
-		GameObject x = Resources.Load ("bingo_x") as GameObject;
+		GameObject x = Resources.Load ("bingo chip") as GameObject;
 
 		Vector3 xPosition = new Vector3(0,0,0);
 		switch (board) {
@@ -361,7 +361,7 @@ public class game : MonoBehaviour {
 		}
 
 		x = Instantiate (x, xPosition, Quaternion.identity) as GameObject;
-		x.transform.localScale = new Vector3 (2, 2, 0);
+		x.transform.localScale = new Vector3 (0.16f, 0.16f, 0);
 		x.renderer.sortingOrder = 3;
 	}
 }
