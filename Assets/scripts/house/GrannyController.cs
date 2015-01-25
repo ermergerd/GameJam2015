@@ -4,13 +4,16 @@ using System.Collections;
 public class GrannyController : MonoBehaviour {
 
 	public float speed = 1.5f;
+	public GameObject bullet;
 	private Vector3 target;
 	private const string myGlasses = "glasses";
 	private const int ohThereItIsAudio = 0;
 	private const int whereAreMyGlassesAudio = 1;
 	private const int flushingAudio = 2;
 	private AudioSource[] aSources;
-	public GameObject bullet;
+	private GameObject bathroomDoor;
+	private GameObject bathroomDoorBlur;
+	private bool takingAPee;
 
 	// granny can only fire bread every 1.5 seconds
 	private const float coolDownTimeLimit = 1.5f;
@@ -25,6 +28,9 @@ public class GrannyController : MonoBehaviour {
 
 			aSources[whereAreMyGlassesAudio].Play();
 
+		 	bathroomDoor = GameObject.Find("door");
+			bathroomDoorBlur = GameObject.Find("door-blur");
+			takingAPee = false;
 		}
 	}
 	
@@ -62,7 +68,15 @@ public class GrannyController : MonoBehaviour {
 		}
 
 		transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-	
+
+		if (takingAPee) {
+			if (aSources[flushingAudio].isPlaying==false) {
+				gameObject.renderer.enabled = true;
+				bathroomDoorBlur.renderer.enabled = false;
+				bathroomDoor.renderer.enabled = false;
+				takingAPee = false;
+			}
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
@@ -90,16 +104,24 @@ public class GrannyController : MonoBehaviour {
 			}
 		} else if (other.name == "bathroom door boundary") {
 
+			if (GrannyState.instance.hasGlasses) {
+				bathroomDoor.renderer.enabled = true;
+			} else {
+				bathroomDoorBlur.renderer.enabled = true;
+			}
+
+			gameObject.renderer.enabled = false;
 			aSources[flushingAudio].Play();
 			GrannyState.instance.currentBladder = 0;
+			takingAPee = true;
+
+		} else if (other.name == "fireball2" ||
+		           other.name == "fireball2(Clone)") {
+
+			audio.Play ();
+			GrannyState.instance.currentBloodPressure += 10;
+			Destroy(other.gameObject);
 
 		}
 	}
-
-	void OnCollisionEnter2D(Collision2D other) {
-		//target = transform.position;
-		Debug.Log ("Granny collision detected");
-
-	}
-	
 }

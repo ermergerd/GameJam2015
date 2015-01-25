@@ -4,6 +4,8 @@ using System.Collections;
 public class ToasterController : MonoBehaviour {
 
 	public float speed = 1.5f;
+	public GameObject fireball1;
+
 	private Vector3 start;
 	private Vector3 end;
 	private bool movingLeftToRight = true;
@@ -40,6 +42,22 @@ public class ToasterController : MonoBehaviour {
 
 		}
 
+	}
+
+	void FixedUpdate() {
+
+		// randomly chuck fireballs
+		System.Random r = new System.Random();
+		int rInt = r.Next(0, 100); 
+		
+		if (rInt == 99) {
+			this.ThrowFireball();
+		}
+	}
+
+	void ThrowFireball() {
+		GameObject temp = (GameObject) Instantiate(fireball1, transform.position, Quaternion.identity);
+		temp.rigidbody2D.velocity = -Vector2.right * 15.0f;
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
