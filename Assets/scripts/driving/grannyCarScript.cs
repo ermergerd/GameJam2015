@@ -7,6 +7,11 @@ public class grannyCarScript : MonoBehaviour {
 	private Vector3 target;
 	private AudioSource[] aSources;
 
+	public Sprite slowSprite;
+	public Sprite fastSprite;
+	public Sprite fastSpriteLeft;
+	public Sprite fastSpriteRight;
+
 	// Use this for initialization
 	void Start () {
 		target = transform.position;
@@ -60,10 +65,20 @@ public class grannyCarScript : MonoBehaviour {
 		}else if (speed > 150){
 
 		}else if (speed > 100){
+			if(Random.value>.9){
+				if(GetComponent<SpriteRenderer>().sprite == fastSpriteLeft)
+					GetComponent<SpriteRenderer>().sprite = fastSpriteRight;
+				else
+					GetComponent<SpriteRenderer>().sprite = fastSpriteLeft;
+
+			}
 
 		}else if (speed > 50){
+			GetComponent<SpriteRenderer>().sprite = fastSprite;
 			if(!aSources[1].isPlaying)
 				aSources[1].Play();
+		}else{
+			GetComponent<SpriteRenderer>().sprite = slowSprite;
 		}
 
 	}
@@ -76,7 +91,7 @@ public class grannyCarScript : MonoBehaviour {
 			//Application.LoadLevel("bingo_scene");
 			GrannyState.instance.loadNextLevel();
 		}else{
-			GrannyState.instance.currentBloodPressure+=10;
+			GrannyState.instance.currentBloodPressure+=3;
 			//play crash sound
 			if(!aSources[0].isPlaying)
 				aSources[0].Play();

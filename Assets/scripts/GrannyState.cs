@@ -50,6 +50,9 @@ public class GrannyState : MonoBehaviour {
 	public int drinkCt;
 
 	[System.NonSerialized]
+	public int medsCt;
+
+	[System.NonSerialized]
 	public bool hasGlasses;
 
 	[System.NonSerialized]
@@ -81,6 +84,7 @@ public class GrannyState : MonoBehaviour {
 		breadCt = 0;
 		candyCt = 1;
 		drinkCt = 0;
+		medsCt = 0;
 		hasGlasses = false;
 		hasDentures = false;
 		hasCane = false;
@@ -111,6 +115,9 @@ public class GrannyState : MonoBehaviour {
 
 	private void grannyOneHealthInterval(){
 		Debug.Log("grannyOneHealthInterval");
+		if(Application.loadedLevelName=="bingo_scene"){
+			return;
+		}
 		currentHunger++;
 
 		//hydration/bladder stuff
@@ -142,6 +149,11 @@ public class GrannyState : MonoBehaviour {
 			return;
 		}
 
+		if(currentBloodPressure<=0){
+			grannyWin();
+			return;
+		}
+
 	}
 
 	private void grannyDeath(){
@@ -149,10 +161,21 @@ public class GrannyState : MonoBehaviour {
 		Application.LoadLevel("gameover");
 	}
 
+	private void grannyWin(){
+		Application.LoadLevel("gamewin");
+	}
+
 	public void eatBread(){
 		if(breadCt>0){
 			currentHunger-=20;
 			breadCt--;
+		}
+	}
+
+	public void takeMeds(){
+		if(medsCt>0){
+			currentBloodPressure-=20;
+			medsCt--;
 		}
 	}
 

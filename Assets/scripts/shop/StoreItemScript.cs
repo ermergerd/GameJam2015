@@ -9,6 +9,7 @@ public class StoreItemScript : MonoBehaviour {
 	public Sprite drinkSprite;
 	public Sprite dentureSprite;
 	public Sprite glassesSprite;
+	public Sprite medsSprite;
 
 	public TextMesh buttonText;
 
@@ -19,6 +20,7 @@ public class StoreItemScript : MonoBehaviour {
 		glasses,
 		candy,
 		dentures,
+		meds
 	}
 
 	private StoreItem type;
@@ -53,7 +55,10 @@ public class StoreItemScript : MonoBehaviour {
 		case StoreItem.dentures:
 			sr.sprite = dentureSprite;
 			break;
-
+		case StoreItem.meds:
+			sr.sprite = medsSprite;
+			break;
+			
 		}
 		//show price
 		buttonText.text = "$"+price;
@@ -88,6 +93,9 @@ public class StoreItemScript : MonoBehaviour {
 					break;
 				case StoreItem.dentures:
 					GrannyState.instance.hasDentures = true;
+					break;
+				case StoreItem.meds:
+					GrannyState.instance.medsCt++;
 					break;
 				}
 				GrannyState.instance.moneyCt-=price;

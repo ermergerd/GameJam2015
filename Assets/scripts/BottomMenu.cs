@@ -17,6 +17,7 @@ public class BottomMenu : MonoBehaviour {
 	public Button invGlasses;
 	public Button invDentures;
 	public Button invCane;
+	public Button invMeds;
 	//public Button invMoney;
 
 	// Use this for initialization
@@ -24,6 +25,7 @@ public class BottomMenu : MonoBehaviour {
 		invBread.onClick.AddListener(() => GrannyState.instance.eatBread());
 		invCandy.onClick.AddListener(() => GrannyState.instance.eatCandy());
 		invDrink.onClick.AddListener(() => GrannyState.instance.drink());
+		invMeds.onClick.AddListener(() => GrannyState.instance.takeMeds());
 	}
 	
 	// Update is called once per frame
@@ -37,6 +39,7 @@ public class BottomMenu : MonoBehaviour {
 		invBread.GetComponentInChildren<Text>().text = ""+GrannyState.instance.breadCt;
 		invCandy.GetComponentInChildren<Text>().text = ""+GrannyState.instance.candyCt;
 		invDrink.GetComponentInChildren<Text>().text = ""+GrannyState.instance.drinkCt;
+		invMeds.GetComponentInChildren<Text>().text = ""+GrannyState.instance.medsCt;
 		
 		invGlasses.gameObject.SetActive(GrannyState.instance.hasGlasses);
 		if(GrannyState.instance.hasGlasses)

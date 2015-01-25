@@ -3,10 +3,11 @@ using System.Collections;
 
 public class GrannyController : MonoBehaviour {
 
-	public float speed = 1.5f;
+	public float speed = 2.0f;
 	public GameObject bullet;
 	public Sprite grannyWithGlasses;
 
+	private const float grannySpeedWithCane = 4.0f;
 	private Vector3 target;
 	private const string myGlasses = "glasses";
 	private const int ohThereItIsAudio = 0;
@@ -27,12 +28,8 @@ public class GrannyController : MonoBehaviour {
 		aSources = GetComponents<AudioSource>();
 	 	grannyImage = gameObject.GetComponent<SpriteRenderer>();
 
-		if (Application.loadedLevelName == "wakeup_scene" && 
-		    GrannyState.instance.hasGlasses == false) {
-
-			aSources[whereAreMyGlassesAudio].Play();
-
-		 	bathroomDoor = GameObject.Find("door");
+		if (Application.loadedLevelName == "wakeup_scene") {
+			bathroomDoor = GameObject.Find("door");
 			bathroomDoorBlur = GameObject.Find("door-blur");
 			takingAPee = false;
 		}
@@ -40,6 +37,18 @@ public class GrannyController : MonoBehaviour {
 		if (GrannyState.instance.hasGlasses) {
 			grannyImage.sprite = grannyWithGlasses;
 		}
+
+		if (Application.loadedLevelName == "wakeup_scene" && 
+		    GrannyState.instance.hasGlasses == false) {
+
+			aSources[whereAreMyGlassesAudio].Play();
+
+		}
+
+		if (GrannyState.instance.hasCane) {
+			speed = grannySpeedWithCane;
+		}
+
 	}
 	
 	void Update () {
@@ -130,7 +139,7 @@ public class GrannyController : MonoBehaviour {
 		           other.name == "fireball2(Clone)") {
 
 			audio.Play ();
-			GrannyState.instance.currentBloodPressure += 5;
+			GrannyState.instance.currentBloodPressure += 3;
 			Destroy(other.gameObject);
 
 		}
