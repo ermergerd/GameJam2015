@@ -15,3 +15,7 @@ EditorBuildSettings:
     path: Assets/scenes/kitchen.unity
   - enabled: 1
     path: Assets/scenes/shop.unity
+  - enabled: 1
+    path: Assets/scenes/gameover.unity
+  - enabled: 1
+    path: Assets/scenes/gamewin.unity

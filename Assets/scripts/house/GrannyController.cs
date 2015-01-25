@@ -3,8 +3,11 @@ using System.Collections;
 
 public class GrannyController : MonoBehaviour {
 
-	public float speed = 1.5f;
+	public float speed = 2.0f;
 	public GameObject bullet;
+	public Sprite grannyWithGlasses;
+
+	private const float grannySpeedWithCane = 4.0f;
 	private Vector3 target;
 	private const string myGlasses = "glasses";
 	private const int ohThereItIsAudio = 0;
@@ -14,6 +17,7 @@ public class GrannyController : MonoBehaviour {
 	private GameObject bathroomDoor;
 	private GameObject bathroomDoorBlur;
 	private bool takingAPee;
+	private SpriteRenderer grannyImage;
 
 	// granny can only fire bread every 1.5 seconds
 	private const float coolDownTimeLimit = 1.5f;
@@ -22,16 +26,29 @@ public class GrannyController : MonoBehaviour {
 	void Start () {
 		target = transform.position;
 		aSources = GetComponents<AudioSource>();
+	 	grannyImage = gameObject.GetComponent<SpriteRenderer>();
+
+		if (Application.loadedLevelName == "wakeup_scene") {
+			bathroomDoor = GameObject.Find("door");
+			bathroomDoorBlur = GameObject.Find("door-blur");
+			takingAPee = false;
+		}
+
+		if (GrannyState.instance.hasGlasses) {
+			grannyImage.sprite = grannyWithGlasses;
+		}
 
 		if (Application.loadedLevelName == "wakeup_scene" && 
 		    GrannyState.instance.hasGlasses == false) {
 
 			aSources[whereAreMyGlassesAudio].Play();
 
-		 	bathroomDoor = GameObject.Find("door");
-			bathroomDoorBlur = GameObject.Find("door-blur");
-			takingAPee = false;
 		}
+
+		if (GrannyState.instance.hasCane) {
+			speed = grannySpeedWithCane;
+		}
+
 	}
 	
 	void Update () {
@@ -89,6 +106,7 @@ public class GrannyController : MonoBehaviour {
 			Destroy(other.gameObject);
 			GrannyState.instance.hasGlasses = true;
 			Destroy(GameObject.Find ("bedroom-blur"));
+			grannyImage.sprite = grannyWithGlasses;
 
 		} else if (other.name == "kitchen door boundary") {
 
@@ -121,7 +139,7 @@ public class GrannyController : MonoBehaviour {
 		           other.name == "fireball2(Clone)") {
 
 			audio.Play ();
-			GrannyState.instance.currentBloodPressure += 10;
+			GrannyState.instance.currentBloodPressure += 3;
 			Destroy(other.gameObject);
 
 		}
