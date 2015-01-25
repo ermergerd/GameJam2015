@@ -16,7 +16,7 @@ public class GrannyController : MonoBehaviour {
 		aSources = GetComponents<AudioSource>();
 
 		if (Application.loadedLevelName == "wakeup_scene" && 
-		    GrannyState.instance.hasGlasses==false) {
+		    GrannyState.instance.hasGlasses == false) {
 
 			aSources[whereAreMyGlassesAudio].Play();
 
@@ -32,6 +32,7 @@ public class GrannyController : MonoBehaviour {
 
 				GameObject temp = (GameObject) Instantiate(bullet, transform.position, Quaternion.identity);
 				temp.rigidbody2D.velocity = Vector2.right * 20.0f;
+
 
 			}
 		}
@@ -49,6 +50,7 @@ public class GrannyController : MonoBehaviour {
 			aSources[ohThereItIsAudio].Play();
 			Destroy(other.gameObject);
 			GrannyState.instance.hasGlasses = true;
+			Destroy(GameObject.Find ("bedroom-blur"));
 
 		} else if (other.name == "kitchen door boundary") {
 
@@ -62,6 +64,10 @@ public class GrannyController : MonoBehaviour {
 				Application.LoadLevel("kitchen");
 
 			}
+		} else if (other.name == "bathroom door boundary") {
+
+			GrannyState.instance.currentBladder = 0;
+
 		}
 	}
 
