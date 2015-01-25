@@ -115,6 +115,9 @@ public class GrannyState : MonoBehaviour {
 
 	private void grannyOneHealthInterval(){
 		Debug.Log("grannyOneHealthInterval");
+		if(Application.loadedLevelName=="bingo_scene"){
+			return;
+		}
 		currentHunger++;
 
 		//hydration/bladder stuff
