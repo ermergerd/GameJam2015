@@ -2422,17 +2422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 762b91e03de3df34c8ce5b337a9be869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyCt: 10
-  breadCt: 0
-  candyCt: 0
-  drinkCt: 0
-  hasGlasses: 0
-  hasDentures: 0
-  hasCane: 0
-  currentHunger: 10
-  currentBloodPressure: 20
-  currentBladder: 90
-  currentHydration: 50
 --- !u!4 &1151134103
 Transform:
   m_ObjectHideFlags: 0
@@ -2752,7 +2741,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 2869203717
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cdf957dfe8bb10d48bf1876c2610ac4d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4b66035e2410a348a9178d4202baa8e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1265398988
 MonoBehaviour:
@@ -2765,6 +2754,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bd321bdc05bd84b8397e29f7cb91ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowSprite: {fileID: 21300000, guid: a4b66035e2410a348a9178d4202baa8e, type: 3}
+  fastSprite: {fileID: 21300000, guid: 92aaed83aed0383448aba207148c3115, type: 3}
+  fastSpriteLeft: {fileID: 21300000, guid: 9bfb859a086d6b4449670d7acf3d064c, type: 3}
+  fastSpriteRight: {fileID: 21300000, guid: 5ef4199cc8daa414e938123f0ea4106e, type: 3}
 --- !u!114 &1265398989
 MonoBehaviour:
   m_ObjectHideFlags: 0
