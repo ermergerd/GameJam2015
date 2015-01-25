@@ -88,7 +88,7 @@ public class GrannyState : MonoBehaviour {
 
 		currentHunger = 10;
 		currentBloodPressure = 20;
-		currentBladder = 90;
+		currentBladder = 70;
 		currentHydration = 60;
 	}
 
@@ -173,19 +173,21 @@ public class GrannyState : MonoBehaviour {
 	}
 
 	public void loadNextLevel(){
-		if(!beatHouse2){
+		if(!beatHouse1){
 			beatHouse1 = true;
 			Application.LoadLevel("kitchen");
-		}else if(!beatDriving){
+		}
+		else if(!beatHouse2){
 			beatHouse2 = true;
 			Application.LoadLevel("driving");
-		}else if(!beatBingo){
+		}else if(!beatDriving){
 			beatDriving = true;
 			Application.LoadLevel("bingo_scene");
-		}else if(!beatStore){
+		}else if(!beatBingo){
 			beatBingo = true;
 			Application.LoadLevel("shop");
-		}else{
+		}else{ //if(!beatStore){
+
 			beatStore = true;
 			//random level!
 			float numLevels = 4;
