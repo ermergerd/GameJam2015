@@ -15,7 +15,7 @@ public class GrannyController : MonoBehaviour {
 		aSources = GetComponents<AudioSource>();
 
 		if (Application.loadedLevelName == "wakeup_scene" && 
-		    GrannyState.hasGlasses==false) {
+		    GrannyState.instance.hasGlasses==false) {
 
 			aSources[whereAreMyGlassesAudio].Play();
 
@@ -37,7 +37,7 @@ public class GrannyController : MonoBehaviour {
 
 			aSources[ohThereItIsAudio].Play();
 			Destroy(other.gameObject);
-			GrannyState.hasGlasses = true;
+			GrannyState.instance.hasGlasses = true;
 
 		} else if (other.name == "kitchen door boundary") {
 

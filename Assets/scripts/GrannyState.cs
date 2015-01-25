@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class GrannyState : MonoBehaviour {
@@ -34,41 +33,28 @@ public class GrannyState : MonoBehaviour {
 		}
 	}
 
-	public Slider hungerSlider;
-	public Slider bloodSlider;
-	public Slider bladderSlider;
-	public Slider hydrationSlider;
-	//public GridLayoutGroup inventory;
-	public Button invMoney;
-	public Button invBread;
-	public Button invCandy;
-	public Button invDrink;
-	public Button invGlasses;
-	public Button invDentures;
-	public Button invCane;
-	//public Button invMoney;
 
 
 	const float healthInterval = 5;
 
-	public static int moneyCt;
-	public static int breadCt;
-	public static int candyCt;
-	public static int drinkCt;
-	public static bool hasGlasses;
-	public static bool hasDentures;
-	public static bool hasCane;
+	public int moneyCt;
+	public int breadCt;
+	public int candyCt;
+	public int drinkCt;
+	public bool hasGlasses;
+	public bool hasDentures;
+	public bool hasCane;
 	//TODO meds
 
-	public static int currentHunger; //die if 0, goes up over time
-	public static int currentBloodPressure; //die if 100, goes up on harm events
-	public static int currentBladder; //die if 100, goes up over time if hydrated
-	public static int currentHydration; //die if 0, goes down over time
+	public int currentHunger; //die if 0, goes up over time
+	public int currentBloodPressure; //die if 100, goes up on harm events
+	public int currentBladder; //die if 100, goes up over time if hydrated
+	public int currentHydration; //die if 0, goes down over time
 
 	void initGranny(){
 		moneyCt = 10;
 		breadCt = 0;
-		candyCt = 0;
+		candyCt = 1;
 		drinkCt = 0;
 		hasGlasses = false;
 		hasDentures = false;
@@ -80,32 +66,21 @@ public class GrannyState : MonoBehaviour {
 		currentHydration = 50;
 	}
 
-	public 
+	private GrannyState(){
+		initGranny();
+		InvokeRepeating("grannyOneHealthInterval", healthInterval, healthInterval);
+	}
 
 	// Use this for initialization
 	void Start () {
 		Debug.Log("GrannyState Start");
 		initGranny();
-		InvokeRepeating("grannyOneHealthInterval", healthInterval, healthInterval);
 
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		hungerSlider.value = currentHunger;
-		bloodSlider.value = currentBloodPressure;
-		hydrationSlider.value = currentHydration;
-		bladderSlider.value = currentBladder;
-
-		invMoney.GetComponentInChildren<Text>().text = ""+moneyCt;
-		invBread.GetComponentInChildren<Text>().text = ""+breadCt;
-		invCandy.GetComponentInChildren<Text>().text = ""+candyCt;
-		invDrink.GetComponentInChildren<Text>().text = ""+drinkCt;
-
-		invGlasses.gameObject.SetActive(hasGlasses);
-		invCane.gameObject.SetActive(hasCane);
-		invDentures.gameObject.SetActive(hasDentures);
 
 	}
 
@@ -149,21 +124,21 @@ public class GrannyState : MonoBehaviour {
 		Application.Quit();
 	}
 
-	public static void eatBread(){
+	public void eatBread(){
 		if(breadCt>0){
 			currentHunger-=20;
 			breadCt--;
 		}
 	}
 
-	public static void eatCandy(){
+	public void eatCandy(){
 		if(candyCt>0){
 			currentHunger-=5;
 			candyCt--;
 		}
 	}
 
-	public static void drink(){
+	public void drink(){
 		if(drinkCt>0){
 			currentHydration+=40;
 			drinkCt--;

@@ -75,7 +75,7 @@ public class grannyCarScript : MonoBehaviour {
 			//go to bingo!
 			Application.LoadLevel("bingo_scene");
 		}else{
-			GrannyState.currentBloodPressure+=20;
+			GrannyState.instance.currentBloodPressure+=20;
 			//play crash sound
 			if(!aSources[0].isPlaying)
 				aSources[0].Play();
