@@ -1,34 +1,60 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class GrannyState : MonoBehaviour {
 
-	public Slider hungerSlider;
-	public Slider bloodSlider;
-	public Slider bladderSlider;
-	public Slider hydrationSlider;
+	private static GrannyState _instance;
+
+	public static GrannyState instance{
+		get{
+			if(_instance==null){
+				_instance = GameObject.FindObjectOfType<GrannyState>();
+
+				DontDestroyOnLoad(_instance.gameObject);
+			}
+			return _instance;
+		}
+	}
+
+	void Awake() 
+	{
+		if(_instance == null)
+		{
+			//If I am the first instance, make me the Singleton
+			_instance = this;
+			DontDestroyOnLoad(this);
+		}
+		else
+		{
+			//If a Singleton already exists and you find
+			//another reference in scene, destroy it!
+			if(this != _instance)
+				Destroy(this.gameObject);
+		}
+	}
+
+
 
 	const float healthInterval = 5;
 
-	public static int moneyCt;
-	public static int breadCt;
-	public static int candyCt;
-	public static int drinkCt;
-	public static bool hasGlasses;
-	public static bool hasDentures;
-	public static bool hasCane;
+	public int moneyCt;
+	public int breadCt;
+	public int candyCt;
+	public int drinkCt;
+	public bool hasGlasses;
+	public bool hasDentures;
+	public bool hasCane;
 	//TODO meds
 
-	public static int currentHunger; //die if 0, goes up over time
-	public static int currentBloodPressure; //die if 100, goes up on harm events
-	public static int currentBladder; //die if 100, goes up over time if hydrated
-	public static int currentHydration; //die if 0, goes down over time
+	public int currentHunger; //die if 0, goes up over time
+	public int currentBloodPressure; //die if 100, goes up on harm events
+	public int currentBladder; //die if 100, goes up over time if hydrated
+	public int currentHydration; //die if 0, goes down over time
 
 	void initGranny(){
 		moneyCt = 10;
 		breadCt = 0;
-		candyCt = 0;
+		candyCt = 1;
 		drinkCt = 0;
 		hasGlasses = false;
 		hasDentures = false;
@@ -40,18 +66,21 @@ public class GrannyState : MonoBehaviour {
 		currentHydration = 50;
 	}
 
-	// Use this for initialization
-	void Start () {
+	private GrannyState(){
 		initGranny();
 		InvokeRepeating("grannyOneHealthInterval", healthInterval, healthInterval);
+	}
+
+	// Use this for initialization
+	void Start () {
+		Debug.Log("GrannyState Start");
+		initGranny();
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		hungerSlider.value = currentHunger;
-		bloodSlider.value = currentBloodPressure;
-		hydrationSlider.value = currentHydration;
-		bladderSlider.value = currentBladder;
 
 	}
 
@@ -95,21 +124,21 @@ public class GrannyState : MonoBehaviour {
 		Application.Quit();
 	}
 
-	public static void eatBread(){
+	public void eatBread(){
 		if(breadCt>0){
 			currentHunger-=20;
 			breadCt--;
 		}
 	}
 
-	public static void eatCandy(){
+	public void eatCandy(){
 		if(candyCt>0){
 			currentHunger-=5;
 			candyCt--;
 		}
 	}
 
-	public static void drink(){
+	public void drink(){
 		if(drinkCt>0){
 			currentHydration+=40;
 			drinkCt--;
