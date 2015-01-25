@@ -37,18 +37,38 @@ public class GrannyState : MonoBehaviour {
 
 	const float healthInterval = 5;
 
+	[System.NonSerialized]
 	public int moneyCt;
+
+	[System.NonSerialized]
 	public int breadCt;
+
+	[System.NonSerialized]
 	public int candyCt;
+
+	[System.NonSerialized]
 	public int drinkCt;
+
+	[System.NonSerialized]
 	public bool hasGlasses;
+
+	[System.NonSerialized]
 	public bool hasDentures;
+
+	[System.NonSerialized]
 	public bool hasCane;
 	//TODO meds
 
+	[System.NonSerialized]
 	public int currentHunger; //die if 0, goes up over time
+
+	[System.NonSerialized]
 	public int currentBloodPressure; //die if 100, goes up on harm events
+
+	[System.NonSerialized]
 	public int currentBladder; //die if 100, goes up over time if hydrated
+
+	[System.NonSerialized]
 	public int currentHydration; //die if 0, goes down over time
 
 	void initGranny(){
@@ -63,19 +83,19 @@ public class GrannyState : MonoBehaviour {
 		currentHunger = 10;
 		currentBloodPressure = 20;
 		currentBladder = 90;
-		currentHydration = 50;
+		currentHydration = 60;
 	}
 
 	private GrannyState(){
-		initGranny();
-		InvokeRepeating("grannyOneHealthInterval", healthInterval, healthInterval);
+//		initGranny();
+//		InvokeRepeating("grannyOneHealthInterval", healthInterval, healthInterval);
 	}
 
 	// Use this for initialization
 	void Start () {
 		Debug.Log("GrannyState Start");
 		initGranny();
-
+		InvokeRepeating("grannyOneHealthInterval", healthInterval, healthInterval);
 
 	}
 	
@@ -89,7 +109,7 @@ public class GrannyState : MonoBehaviour {
 		currentHunger++;
 
 		//hydration/bladder stuff
-		if(currentHydration>50){
+		if(currentHydration>=50){
 			currentBladder++;
 		}
 
@@ -122,6 +142,7 @@ public class GrannyState : MonoBehaviour {
 	private void grannyDeath(){
 		//game over
 		Application.Quit();
+		Debug.Break();
 	}
 
 	public void eatBread(){
