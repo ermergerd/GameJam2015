@@ -5,10 +5,11 @@ using System;
 
 public class game : MonoBehaviour {
 
-	int currentNumber;
-	List<int> calledNumbers;
-	int updateTimes;
-	bool gameOver;
+	// General state
+	private int currentNumber;
+	private List<int> calledNumbers;
+	private int updateTimes;
+	private bool gameOver;
 
 	// Granny's boards
 	private int[][,] boards;
@@ -24,12 +25,27 @@ public class game : MonoBehaviour {
 	// The number bucket (initialized to all numbers 1-75)
 	private List<int> bucket;
 
+	// Time delays for sound effects and end of game
+	private int endOfGameDelay;
+	private int opponentBingoDelay;
+
+	// Constants for the game (that we could tweak)
+	private const int NumberOfOpponents = 10;
+	private const int NewNumberRefreshInSec = 10;
+	private const int OpponentBingoDelay = 5 * 50;
+	private const int EndOfGameDelay = 2 * 50;
+
 	// Use this for initialization
 	void Start () {
+		// General state
 		currentNumber = -1;
 		calledNumbers = new List<int>();
 		updateTimes = 0;
 		gameOver = false;
+
+		// Setup the delays to not be running
+		endOfGameDelay = 0;
+		opponentBingoDelay = 0;
 
 		// Generate the boards
 		rand = new System.Random ();
@@ -60,9 +76,9 @@ public class game : MonoBehaviour {
 			}
 		}
 
-		opponentBoards = new int[20][,];
-		opponentBoardsStates = new bool[20][,];
-		for (int i = 0; i < 20; i++) {
+		opponentBoards = new int[NumberOfOpponents][,];
+		opponentBoardsStates = new bool[NumberOfOpponents][,];
+		for (int i = 0; i < NumberOfOpponents; i++) {
 			opponentBoards[i] = new int[5, 5];
 			GenerateBoard(ref opponentBoards[i]);
 
@@ -133,11 +149,30 @@ public class game : MonoBehaviour {
 			gameOver = true;
 		}
 
+		// Handle the delays
+		if (endOfGameDelay > 0) {
+			endOfGameDelay--;
+			if (endOfGameDelay == 0) {
+				// TODO: Handle end of game
+			}
+		} else if (opponentBingoDelay > 0) {
+			opponentBingoDelay--;
+			if (opponentBingoDelay == 0) {
+				// Handle opponent bingo
+				AudioClip other_winner = Resources.Load ("bingo_other_winner") as AudioClip;
+				audio.clip = other_winner;
+				audio.Play ();
+
+				gameOver = true;
+				endOfGameDelay = EndOfGameDelay;
+			}
+		}
+
 		if (!gameOver) {
 			updateTimes++;
 
-			// This should be called 50 times a second (default physics update), update every 10s
-			if (updateTimes >= 50 * 10) {
+			// This should be called 50 times a second (default physics update)
+			if (updateTimes >= 50 * NewNumberRefreshInSec) {
 				updateTimes = 0;
 				PickANumber ();
 			}
@@ -191,7 +226,7 @@ public class game : MonoBehaviour {
 		circle.renderer.sortingOrder = 3;
 
 		// Update the opponent states and handle any winners
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < NumberOfOpponents; i++) {
 			for (int j = 0; j < 5; j++) {
 				for (int k = 0; k < 5; k++) {
 					if (opponentBoards[i][j,k] == currentNumber) {
@@ -199,13 +234,9 @@ public class game : MonoBehaviour {
 
 						// Check for a winner
 						if (CheckForWinner(ref opponentBoardsStates[i], j, k)) {
-							// TODO: Handle other winner
+							// Handle other winner
 							Debug.Log ("Game over: someone else won!");
-
-							AudioClip other_winner = Resources.Load ("bingo_other_winner") as AudioClip;
-							audio.clip = other_winner;
-							audio.Play ();
-
+							opponentBingoDelay = OpponentBingoDelay;
 							gameOver = true;
 						}
 					}
@@ -232,6 +263,11 @@ public class game : MonoBehaviour {
 	public void BoardClicked(string name) {
 		// Handle the board being clicked (if it has a number, update the state, otherwise bad granny game over)
 		Debug.Log ("Board clicked: " + name);
+
+		// Don't process if the game is over
+		if (gameOver) {
+			return;
+		}
 
 		int boardNum = 0;
 		if (name == "board1") {
@@ -266,6 +302,7 @@ public class game : MonoBehaviour {
 
 						Debug.Log("Game over: Granny won!!");
 						gameOver = true;
+						endOfGameDelay = EndOfGameDelay;
 					}
 
 					// Only allow granny to find one number at a time
@@ -284,9 +321,14 @@ public class game : MonoBehaviour {
 
 				PlaceToken(boardNum, 2, 2);
 			} else {
-				// TODO: Granny cheated! Handle loss
+				// Granny cheated! Handle loss
+				AudioClip other_winner = Resources.Load ("granny_cheated") as AudioClip;
+				audio.clip = other_winner;
+				audio.Play ();
+
 				Debug.Log("Game over: Granny cheated!");
 				gameOver = true;
+				endOfGameDelay = EndOfGameDelay;
 			}
 		}
 	}
