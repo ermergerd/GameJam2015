@@ -8,8 +8,13 @@ public class GrannyController : MonoBehaviour {
 	private const string myGlasses = "glasses";
 	private const int ohThereItIsAudio = 0;
 	private const int whereAreMyGlassesAudio = 1;
+	private const int flushingAudio = 2;
 	private AudioSource[] aSources;
 	public GameObject bullet;
+
+	// granny can only fire bread every 1.5 seconds
+	private const float coolDownTimeLimit = 1.5f;
+	private float coolDownBulletTimeLeft = coolDownTimeLimit;
 
 	void Start () {
 		target = transform.position;
@@ -24,15 +29,34 @@ public class GrannyController : MonoBehaviour {
 	}
 	
 	void Update () {
+
+		if (coolDownBulletTimeLeft > 1) {
+			
+			Debug.Log(coolDownBulletTimeLeft);
+			coolDownBulletTimeLeft -= Time.deltaTime;
+			
+		} 
+
 		if (Input.GetMouseButtonDown(0)) {
 			target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			target.z = transform.position.z;
 
 			if (Application.loadedLevelName == "kitchen") {
 
-				GameObject temp = (GameObject) Instantiate(bullet, transform.position, Quaternion.identity);
-				temp.rigidbody2D.velocity = Vector2.right * 20.0f;
+				if (coolDownBulletTimeLeft > 1) {
 
+					Debug.Log(coolDownBulletTimeLeft);
+					coolDownBulletTimeLeft -= Time.deltaTime;
+
+				} else {
+
+					Debug.Log(coolDownBulletTimeLeft);
+
+					GameObject temp = (GameObject) Instantiate(bullet, transform.position, Quaternion.identity);
+					temp.rigidbody2D.velocity = Vector2.right * 20.0f;
+
+					coolDownBulletTimeLeft = coolDownTimeLimit;
+				}
 
 			}
 		}
@@ -68,6 +92,7 @@ public class GrannyController : MonoBehaviour {
 
 		} else if (other.name == "bathroom door boundary") {
 
+			aSources[flushingAudio].Play();
 			GrannyState.instance.currentBladder = 0;
 
 		}

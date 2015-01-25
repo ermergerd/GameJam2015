@@ -45,11 +45,20 @@ public class ToasterController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		Debug.Log ("Bread hit!!!!");
 
-		Destroy(other.gameObject);
+		if (other.gameObject.name == "bread" || 
+		    other.gameObject.name == "bread(Clone)") {
 
-		if (++numberOfBreadHits >= breadHitsToTransition) {
-			//Application.LoadLevel("driving");
-			GrannyState.instance.loadNextLevel();
+			Destroy(other.gameObject);
+			
+			GrannyState.instance.breadCt++;
+			//GrannyState.instance.eatBread();
+			
+			if (++numberOfBreadHits >= breadHitsToTransition) {
+
+				//Application.LoadLevel("driving");
+				GrannyState.instance.loadNextLevel();
+
+			}
 		}
 	}
 
