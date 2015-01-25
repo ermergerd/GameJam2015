@@ -107,16 +107,16 @@ public class game : MonoBehaviour {
 		Vector3 numPosition = new Vector3(0,0,0);
 		switch (board) {
 		case 0:
-			numPosition = new Vector3(-6.31f + i*0.53f, .3f + j*-0.53f, 0);
+			numPosition = new Vector3(-6.31f + i*0.53f, -1.19f + j*-0.53f, 0);
 			break;
 		case 1:
-			numPosition = new Vector3(-2.89f + i*0.53f, .3f + j*-0.53f, 0);
+			numPosition = new Vector3(-2.89f + i*0.53f, -1.19f + j*-0.53f, 0);
 			break;
 		case 2:
-			numPosition = new Vector3(0.77f + i*0.53f, .3f + j*-0.53f, 0);
+			numPosition = new Vector3(0.77f + i*0.53f, -1.19f + j*-0.53f, 0);
 			break;
 		case 3:
-			numPosition = new Vector3(4.27f + i*0.53f, .3f + j*-0.53f, 0);
+			numPosition = new Vector3(4.27f + i*0.53f, -1.19f + j*-0.53f, 0);
 			break;
 		}
 		
@@ -291,6 +291,7 @@ public class game : MonoBehaviour {
 				// TODO: Granny cheated! Handle loss
 				Debug.Log("Game over: Granny cheated!");
 				gameOver = true;
+				GrannyState.instance.moneyCt-=5;
 				GrannyState.instance.loadNextLevel();
 			}
 		}

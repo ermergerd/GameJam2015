@@ -71,8 +71,7 @@ public class GrannyState : MonoBehaviour {
 	[System.NonSerialized]
 	public int currentHydration; //die if 0, goes down over time
 
-	private bool beatHouse1 = false;
-	private bool beatHouse2 = false;
+	private bool beatHouse = false;
 	private bool beatDriving = false;
 	private bool beatBingo = false;
 	private bool beatStore = false;
@@ -173,12 +172,8 @@ public class GrannyState : MonoBehaviour {
 	}
 
 	public void loadNextLevel(){
-		if(!beatHouse1){
-			beatHouse1 = true;
-			Application.LoadLevel("kitchen");
-		}
-		else if(!beatHouse2){
-			beatHouse2 = true;
+		if(!beatHouse){
+			beatHouse = true;
 			Application.LoadLevel("driving");
 		}else if(!beatDriving){
 			beatDriving = true;
