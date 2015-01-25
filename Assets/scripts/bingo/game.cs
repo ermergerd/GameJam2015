@@ -155,6 +155,7 @@ public class game : MonoBehaviour {
 			endOfGameDelay--;
 			if (endOfGameDelay == 0) {
 				// TODO: Handle end of game
+				GrannyState.instance.loadNextLevel();
 			}
 		} else if (opponentBingoDelay > 0) {
 			opponentBingoDelay--;
@@ -239,7 +240,7 @@ public class game : MonoBehaviour {
 							Debug.Log ("Game over: someone else won!");
 							opponentBingoDelay = OpponentBingoDelay;
 							gameOver = true;
-							GrannyState.instance.loadNextLevel();
+							//GrannyState.instance.loadNextLevel();
 						}
 					}
 				}
@@ -305,7 +306,7 @@ public class game : MonoBehaviour {
 						Debug.Log("Game over: Granny won!!");
 						gameOver = true;
 						endOfGameDelay = EndOfGameDelay;
-						GrannyState.instance.loadNextLevel();
+						//GrannyState.instance.loadNextLevel();
 
 					}
 
@@ -334,7 +335,7 @@ public class game : MonoBehaviour {
 				gameOver = true;
 				endOfGameDelay = EndOfGameDelay;
 				GrannyState.instance.moneyCt-=5;
-				GrannyState.instance.loadNextLevel();
+				//GrannyState.instance.loadNextLevel();
 			}
 		}
 	}
