@@ -1080,7 +1080,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: c08a382494e6a4e07a77cee1af7e4489, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 67361593154a444408aa9ca7b5862fdb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &571820223
 Transform:
@@ -1108,6 +1108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   bullet: {fileID: 0}
+  grannyWithGlasses: {fileID: 21300000, guid: 138177b559b6d473d9f30843140673f9, type: 3}
 --- !u!58 &571820225
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3060,7 +3061,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: .670000017, y: .289999992}
+  m_Size: {x: 1.03999996, y: .340000004}
   m_Center: {x: 0, y: 0}
 --- !u!50 &1283003012
 Rigidbody2D:
@@ -3097,7 +3098,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 103c6c0f290d749beb8bb427dc4f48ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 81f8835f2b8d241d5817d28acfb9a9d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1283003014
 Transform:
@@ -4985,6 +4986,11 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: .899999976
       objectReference: {fileID: 0}
+    - target: {fileID: 21243384, guid: a96f6292660174c41861b2c577bd290f, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67361593154a444408aa9ca7b5862fdb,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a96f6292660174c41861b2c577bd290f, type: 2}
   m_RootGameObject: {fileID: 571820219}

@@ -146,8 +146,7 @@ public class GrannyState : MonoBehaviour {
 
 	private void grannyDeath(){
 		//game over
-		Application.Quit();
-		Debug.Break();
+		Application.LoadLevel("gameover");
 	}
 
 	public void eatBread(){
