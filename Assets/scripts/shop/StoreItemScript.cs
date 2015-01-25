@@ -19,7 +19,7 @@ public class StoreItemScript : MonoBehaviour {
 		cane,
 		glasses,
 		candy,
-		dentures,
+		//dentures,
 		meds
 	}
 
@@ -36,6 +36,7 @@ public class StoreItemScript : MonoBehaviour {
 			price = 1;
 		//update sprite
 		SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
 		switch(type){
 		case StoreItem.bread:
 			sr.sprite = breadSprite;
@@ -52,9 +53,9 @@ public class StoreItemScript : MonoBehaviour {
 		case StoreItem.glasses:
 			sr.sprite = glassesSprite;
 			break;
-		case StoreItem.dentures:
-			sr.sprite = dentureSprite;
-			break;
+//		case StoreItem.dentures:
+//			sr.sprite = dentureSprite;
+//			break;
 		case StoreItem.meds:
 			sr.sprite = medsSprite;
 			break;
@@ -91,9 +92,9 @@ public class StoreItemScript : MonoBehaviour {
 				case StoreItem.glasses:
 					GrannyState.instance.hasGlasses = true;
 					break;
-				case StoreItem.dentures:
-					GrannyState.instance.hasDentures = true;
-					break;
+//				case StoreItem.dentures:
+//					GrannyState.instance.hasDentures = true;
+//					break;
 				case StoreItem.meds:
 					GrannyState.instance.medsCt++;
 					break;
