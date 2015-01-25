@@ -5,13 +5,13 @@ PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 3
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 2
   targetDevice: 2
   targetGlesGraphics: 1
   targetResolution: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: GameJam
+  companyName: LutronGGJ
+  productName: GranHogDay
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   defaultScreenWidth: 1024
@@ -110,9 +110,12 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: c61fb672ae9f240d19438eb60738ab5b, type: 3}
       m_Size: 128
-  m_BuildTargetBatching: []
+  m_BuildTargetBatching:
+  - m_BuildTarget: Android
+    m_StaticBatching: 1
+    m_DynamicBatching: 1
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
   locationUsageDescription: 
