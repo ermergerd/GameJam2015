@@ -51,6 +51,12 @@ public class GrannyState : MonoBehaviour {
 	public int currentBladder; //die if 100, goes up over time if hydrated
 	public int currentHydration; //die if 0, goes down over time
 
+	private bool beatHouse1 = false;
+	private bool beatHouse2 = false;
+	private bool beatDriving = false;
+	private bool beatBingo = false;
+	private bool beatStore = false;
+
 	void initGranny(){
 		moneyCt = 10;
 		breadCt = 0;
@@ -146,4 +152,35 @@ public class GrannyState : MonoBehaviour {
 		}
 	}
 
+	public void loadNextLevel(){
+		if(!beatHouse2){
+			beatHouse1 = true;
+			Application.LoadLevel("kitchen");
+		}else if(!beatDriving){
+			beatHouse2 = true;
+			Application.LoadLevel("driving");
+		}else if(!beatBingo){
+			beatDriving = true;
+			Application.LoadLevel("bingo_scene");
+		}else if(!beatStore){
+			beatBingo = true;
+			Application.LoadLevel("shop");
+		}else{
+			beatStore = true;
+			//random level!
+			float numLevels = 4;
+			float l = Random.value*4;
+
+			if(l<1)
+				Application.LoadLevel("wakeup_scene");
+			else if(l<2)
+				Application.LoadLevel("driving");
+			else if(l<3)
+				Application.LoadLevel("bingo_scene");
+			else if(l<4)
+				Application.LoadLevel("shop");
+
+
+		}
+	}
 }

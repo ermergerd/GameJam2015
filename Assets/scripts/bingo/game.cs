@@ -107,16 +107,16 @@ public class game : MonoBehaviour {
 		Vector3 numPosition = new Vector3(0,0,0);
 		switch (board) {
 		case 0:
-			numPosition = new Vector3(-6.31f + i*0.53f, -1.19f + j*-0.53f, 0);
+			numPosition = new Vector3(-6.31f + i*0.53f, .3f + j*-0.53f, 0);
 			break;
 		case 1:
-			numPosition = new Vector3(-2.89f + i*0.53f, -1.19f + j*-0.53f, 0);
+			numPosition = new Vector3(-2.89f + i*0.53f, .3f + j*-0.53f, 0);
 			break;
 		case 2:
-			numPosition = new Vector3(0.77f + i*0.53f, -1.19f + j*-0.53f, 0);
+			numPosition = new Vector3(0.77f + i*0.53f, .3f + j*-0.53f, 0);
 			break;
 		case 3:
-			numPosition = new Vector3(4.27f + i*0.53f, -1.19f + j*-0.53f, 0);
+			numPosition = new Vector3(4.27f + i*0.53f, .3f + j*-0.53f, 0);
 			break;
 		}
 		
@@ -131,6 +131,7 @@ public class game : MonoBehaviour {
 			// TODO: Handle weird no winner gameover case
 			Debug.Log("Game over: Nobody won!");
 			gameOver = true;
+			GrannyState.instance.loadNextLevel();
 		}
 
 		if (!gameOver) {
@@ -187,6 +188,7 @@ public class game : MonoBehaviour {
 							// TODO: Handle other winner
 							Debug.Log ("Game over: someone else won!");
 							gameOver = true;
+							GrannyState.instance.loadNextLevel();
 						}
 					}
 				}
@@ -242,6 +244,8 @@ public class game : MonoBehaviour {
 
 						Debug.Log("Game over: Granny won!!");
 						gameOver = true;
+						GrannyState.instance.loadNextLevel();
+
 					}
 
 					// Only allow granny to find one number at a time
@@ -263,6 +267,7 @@ public class game : MonoBehaviour {
 				// TODO: Granny cheated! Handle loss
 				Debug.Log("Game over: Granny cheated!");
 				gameOver = true;
+				GrannyState.instance.loadNextLevel();
 			}
 		}
 	}

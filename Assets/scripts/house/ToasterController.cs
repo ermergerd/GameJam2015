@@ -48,7 +48,8 @@ public class ToasterController : MonoBehaviour {
 		Destroy(other.gameObject);
 
 		if (++numberOfBreadHits >= breadHitsToTransition) {
-			Application.LoadLevel("driving");
+			//Application.LoadLevel("driving");
+			GrannyState.instance.loadNextLevel();
 		}
 	}
 

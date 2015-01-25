@@ -73,7 +73,8 @@ public class grannyCarScript : MonoBehaviour {
 		speed = 0;
 		if(collision.gameObject.name=="finishline"){
 			//go to bingo!
-			Application.LoadLevel("bingo_scene");
+			//Application.LoadLevel("bingo_scene");
+			GrannyState.instance.loadNextLevel();
 		}else{
 			GrannyState.instance.currentBloodPressure+=20;
 			//play crash sound

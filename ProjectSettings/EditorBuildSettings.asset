@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/scenes/bingo_scene.unity
   - enabled: 1
     path: Assets/scenes/kitchen.unity
+  - enabled: 1
+    path: Assets/scenes/shop.unity
