@@ -87,15 +87,15 @@ public class GrannyState : MonoBehaviour {
 	}
 
 	private GrannyState(){
-		initGranny();
-		InvokeRepeating("grannyOneHealthInterval", healthInterval, healthInterval);
+//		initGranny();
+//		InvokeRepeating("grannyOneHealthInterval", healthInterval, healthInterval);
 	}
 
 	// Use this for initialization
 	void Start () {
 		Debug.Log("GrannyState Start");
 		initGranny();
-
+		InvokeRepeating("grannyOneHealthInterval", healthInterval, healthInterval);
 
 	}
 	
@@ -109,7 +109,7 @@ public class GrannyState : MonoBehaviour {
 		currentHunger++;
 
 		//hydration/bladder stuff
-		if(currentHydration>50){
+		if(currentHydration>=50){
 			currentBladder++;
 		}
 
@@ -142,6 +142,7 @@ public class GrannyState : MonoBehaviour {
 	private void grannyDeath(){
 		//game over
 		Application.Quit();
+		Debug.Break();
 	}
 
 	public void eatBread(){
