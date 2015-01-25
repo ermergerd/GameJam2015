@@ -626,8 +626,8 @@ EdgeCollider2D:
   - {x: -6.17932892, y: -5.09693575}
   - {x: -4.84596682, y: -3.96994591}
   - {x: -4.77142096, y: -2.4938736}
-  - {x: -4.99016476, y: -2.11040545}
-  - {x: -5.09020376, y: -1.36795044}
+  - {x: -4.55816746, y: -1.74486935}
+  - {x: -4.89082003, y: -1.00241423}
   - {x: -5.08260965, y: -.934484482}
 --- !u!50 &330794241
 Rigidbody2D:
@@ -4452,6 +4452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   bullet: {fileID: 1028950881}
+  grannyWithGlasses: {fileID: 21300000, guid: 138177b559b6d473d9f30843140673f9, type: 3}
 --- !u!61 &2071048771
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4512,7 +4513,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: c08a382494e6a4e07a77cee1af7e4489, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 67361593154a444408aa9ca7b5862fdb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &2071048775
 Transform:

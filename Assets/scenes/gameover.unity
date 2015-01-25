@@ -134,7 +134,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.11479568
+  orthographic size: 5.38060379
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -206,7 +206,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8022e93b56baa4696bf150aa276d6f05, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4e97958e509a41bf8bc6f78a5e4cd41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1248715178
 Transform:

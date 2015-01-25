@@ -6,6 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/scenes/splash.unity
+  - enabled: 1
     path: Assets/scenes/wakeup_scene.unity
   - enabled: 1
     path: Assets/scenes/driving.unity
