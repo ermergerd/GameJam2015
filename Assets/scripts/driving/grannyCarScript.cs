@@ -5,6 +5,7 @@ public class grannyCarScript : MonoBehaviour {
 
 	private float speed = 9;
 	private Vector3 target;
+	private AudioSource[] aSources;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +18,7 @@ public class grannyCarScript : MonoBehaviour {
 		tr.sortingLayerName = "car";
 		tr.sortingOrder = 0;
 
-		//rigidbody2D.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+		aSources = GetComponents<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -54,15 +55,30 @@ public class grannyCarScript : MonoBehaviour {
 			speed = 9f;
 		}
 
+		if(speed > 200){
+			//TODO more audio!
+		}else if (speed > 150){
+
+		}else if (speed > 100){
+
+		}else if (speed > 50){
+			if(!aSources[1].isPlaying)
+				aSources[1].Play();
+		}
+
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
+		Debug.Log("crash @ speed: " + speed);
 		speed = 0;
 		if(collision.gameObject.name=="finishline"){
 			//go to bingo!
 			Application.LoadLevel("bingo_scene");
 		}else{
 			GrannyState.currentBloodPressure+=20;
+			//play crash sound
+			if(!aSources[0].isPlaying)
+				aSources[0].Play();
 		}
 	}
 }

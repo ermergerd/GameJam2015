@@ -4,10 +4,50 @@ using System.Collections;
 
 public class GrannyState : MonoBehaviour {
 
+	private static GrannyState _instance;
+
+	public static GrannyState instance{
+		get{
+			if(_instance==null){
+				_instance = GameObject.FindObjectOfType<GrannyState>();
+
+				DontDestroyOnLoad(_instance.gameObject);
+			}
+			return _instance;
+		}
+	}
+
+	void Awake() 
+	{
+		if(_instance == null)
+		{
+			//If I am the first instance, make me the Singleton
+			_instance = this;
+			DontDestroyOnLoad(this);
+		}
+		else
+		{
+			//If a Singleton already exists and you find
+			//another reference in scene, destroy it!
+			if(this != _instance)
+				Destroy(this.gameObject);
+		}
+	}
+
 	public Slider hungerSlider;
 	public Slider bloodSlider;
 	public Slider bladderSlider;
 	public Slider hydrationSlider;
+	//public GridLayoutGroup inventory;
+	public Button invMoney;
+	public Button invBread;
+	public Button invCandy;
+	public Button invDrink;
+	public Button invGlasses;
+	public Button invDentures;
+	public Button invCane;
+	//public Button invMoney;
+
 
 	const float healthInterval = 5;
 
@@ -40,10 +80,15 @@ public class GrannyState : MonoBehaviour {
 		currentHydration = 50;
 	}
 
+	public 
+
 	// Use this for initialization
 	void Start () {
+		Debug.Log("GrannyState Start");
 		initGranny();
 		InvokeRepeating("grannyOneHealthInterval", healthInterval, healthInterval);
+
+
 	}
 	
 	// Update is called once per frame
@@ -52,6 +97,15 @@ public class GrannyState : MonoBehaviour {
 		bloodSlider.value = currentBloodPressure;
 		hydrationSlider.value = currentHydration;
 		bladderSlider.value = currentBladder;
+
+		invMoney.GetComponentInChildren<Text>().text = ""+moneyCt;
+		invBread.GetComponentInChildren<Text>().text = ""+breadCt;
+		invCandy.GetComponentInChildren<Text>().text = ""+candyCt;
+		invDrink.GetComponentInChildren<Text>().text = ""+drinkCt;
+
+		invGlasses.gameObject.SetActive(hasGlasses);
+		invCane.gameObject.SetActive(hasCane);
+		invDentures.gameObject.SetActive(hasDentures);
 
 	}
 
