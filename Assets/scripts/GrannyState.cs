@@ -207,18 +207,21 @@ public class GrannyState : MonoBehaviour {
 		}else{ //if(!beatStore){
 
 			beatStore = true;
-			//random level!
-			float numLevels = 4;
-			float l = Random.value*4;
 
-			if(l<1)
-				Application.LoadLevel("wakeup_scene");
-			else if(l<2)
-				Application.LoadLevel("driving");
-			else if(l<3)
-				Application.LoadLevel("bingo_scene");
-			else if(l<4)
+			if(Application.loadedLevelName!="shop"){
 				Application.LoadLevel("shop");
+			}else{
+				//random level!
+				float numLevels = 3;
+				float l = Random.value*numLevels;
+
+				if(l<1)
+					Application.LoadLevel("wakeup_scene");
+				else if(l<2)
+					Application.LoadLevel("driving");
+				else if(l<3)
+					Application.LoadLevel("bingo_scene");
+			}
 
 
 		}
