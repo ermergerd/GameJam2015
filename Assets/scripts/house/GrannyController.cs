@@ -9,6 +9,7 @@ public class GrannyController : MonoBehaviour {
 	private const int ohThereItIsAudio = 0;
 	private const int whereAreMyGlassesAudio = 1;
 	private AudioSource[] aSources;
+	public GameObject bullet;
 
 	void Start () {
 		target = transform.position;
@@ -26,11 +27,21 @@ public class GrannyController : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0)) {
 			target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			target.z = transform.position.z;
+
+			if (Application.loadedLevelName == "kitchen") {
+
+				GameObject temp = (GameObject) Instantiate(bullet, transform.position, Quaternion.identity);
+				temp.rigidbody2D.velocity = Vector2.right * 20.0f;
+
+			}
 		}
+
 		transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+	
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
+
 		Debug.Log ("Granny OnTriggerEnter2D Called");
 
 		if (other.name == myGlasses) {
@@ -56,6 +67,8 @@ public class GrannyController : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other) {
 		//target = transform.position;
+		Debug.Log ("Granny collision detected");
+
 	}
 	
 }
