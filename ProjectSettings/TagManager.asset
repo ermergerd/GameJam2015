@@ -3,6 +3,7 @@
 --- !u!78 &1
 TagManager:
   tags:
+  - glasses
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -40,4 +41,12 @@ TagManager:
   - name: Default
     userID: 0
     uniqueID: 0
+    locked: 0
+  - name: road
+    userID: 1
+    uniqueID: 2183867185
+    locked: 0
+  - name: car
+    userID: 2
+    uniqueID: 2869203717
     locked: 0
