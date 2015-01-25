@@ -23,6 +23,7 @@ public class BottomMenu : MonoBehaviour {
 	void Start () {
 		invBread.onClick.AddListener(() => GrannyState.instance.eatBread());
 		invCandy.onClick.AddListener(() => GrannyState.instance.eatCandy());
+		invDrink.onClick.AddListener(() => GrannyState.instance.drink());
 	}
 	
 	// Update is called once per frame
@@ -38,7 +39,15 @@ public class BottomMenu : MonoBehaviour {
 		invDrink.GetComponentInChildren<Text>().text = ""+GrannyState.instance.drinkCt;
 		
 		invGlasses.gameObject.SetActive(GrannyState.instance.hasGlasses);
+		if(GrannyState.instance.hasGlasses)
+			invGlasses.GetComponentInChildren<Text>().text = "";
+
 		invCane.gameObject.SetActive(GrannyState.instance.hasCane);
+		if(GrannyState.instance.hasCane)
+			invCane.GetComponentInChildren<Text>().text = "";
+
 		invDentures.gameObject.SetActive(GrannyState.instance.hasDentures);
+		if(GrannyState.instance.hasDentures)
+			invDentures.GetComponentInChildren<Text>().text = "";
 	}
 }
