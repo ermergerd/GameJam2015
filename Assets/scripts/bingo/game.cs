@@ -238,7 +238,7 @@ public class game : MonoBehaviour {
 					// Check for a winner
 					if (CheckForWinner(ref boardsStates[boardNum], j, k)) {
 						// TODO: Handle granny winner (add money)
-						GrannyState.moneyCt += 50;
+						GrannyState.instance.moneyCt += 50;
 
 						Debug.Log("Game over: Granny won!!");
 						gameOver = true;
