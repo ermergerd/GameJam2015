@@ -31,7 +31,7 @@ public class game : MonoBehaviour {
 
 	// Constants for the game (that we could tweak)
 	private const int NumberOfOpponents = 10;
-	private const int NewNumberRefreshInSec = 10;
+	private const int NewNumberRefreshInSec = 6;
 	private const int OpponentBingoDelay = 5 * 50;
 	private const int EndOfGameDelay = 2 * 50;
 
