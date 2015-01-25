@@ -29,6 +29,7 @@ public class GrannyController : MonoBehaviour {
 
 		} else if (other.name == "kitchen door boundary") {
 
+			// transition between the kitchen and the bedroom
 			if (Application.loadedLevelName == "kitchen") {
 
 				Application.LoadLevel("wakeup_scene");
